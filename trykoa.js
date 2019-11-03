@@ -3,6 +3,7 @@ const serve   = require('koa-static');
 const Router  = require('koa-router');
 const compose = require('koa-compose');
 const mw      = require('./somemiddlewares');
+const responders = require('./responders');
 
 
 const app    = new Koa();
@@ -19,16 +20,35 @@ function dobody(f) {
 }
 
 
-function failing () { throw new Error('bad result')}
 
-const cannedResponse = ()=>({a:1, b:2, c:'hi'});
 
 const router = new Router();
+
 router.prefix('/api');
-router.get('/hello/:id',  dobody(()=>'hello'));
-router.get('/goodbye',    dobody(()=>'goodbye'));
-router.get('/failing',    dobody(failing));
-router.get('/tj',         dobody(cannedResponse));
+
+// substitutions to make to strings
+const translateTable = new Map([
+   [/_/g, '/'],
+   [/\$/g, ':']
+]);
+
+function translate(s) {
+  let ss = s;
+  translateTable.forEach((v,k)=>{
+    ss = ss.replace(k,v);
+  });
+  return ss;
+}
+
+Object.entries(responders).forEach(([k,v])=> {
+
+  // convert underscores in key to slashes
+  // convert dollar signs to colons
+  const route = '/' + translate(k);
+
+  console.log(`${k} => ${route}`);
+  router.get(route, dobody(v));
+});
 
 router.get('/', (ctx)=>{ ctx.status = 404;});
 
@@ -36,14 +56,8 @@ app.use(router.routes());
 app.use(router.allowedMethods());
 app.use(serve('.'));
 
-//... notes as it stands, unsupported routes are marked with ok instead of not found
-
-
-
 // response
-
 const port = parseInt(process.env.koaport) || 3334;
-
 
 
 app.listen(port, ()=>console.log(`koa listening on port: ${port}`));
