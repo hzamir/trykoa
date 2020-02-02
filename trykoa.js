@@ -60,4 +60,4 @@ app.use(serve('.'));
 const port = parseInt(process.env.koaport) || 3334;
 
 
-app.listen(port, ()=>console.log(`koa listening on port: ${port}`));
+app.listen(port, ()=>console.log(`koa listening on port: ${port}, serving static files at /public, other routes at /api`));
