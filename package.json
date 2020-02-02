@@ -1,17 +1,19 @@
 {
+  "type": "commonjs",
   "name": "koatry",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "trykoa.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon trykoa.js"
+    "start": "node -r esm trykoa.js"
   },
   "keywords": [],
   "author": "Haim Zamir <hzamir@gmail.com>",
   "license": "ISC",
   "dependencies": {
-    "nodemon": "^2.0.2",
+    "esm": "^3.2.25",
+    "luxon": "^1.22.0",
     "koa": "^2.11.0",
     "koa-router": "^7.4.0",
     "koa-static": "^5.0.0",
