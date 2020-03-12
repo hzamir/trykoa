@@ -1,0 +1,15 @@
+@startdot
+digraph G {
+
+node [shape=rect]
+
+Event->Stream [label="data & evt type\nusu. in created order"]
+Stream->EventStore [label="Stores events\n w/ unique ids"]
+Stream->Projection[label="Derives current state from stream of events"]
+Projection->Aggregate [label=builds]
+Projection->ReadModel [label="can be stored as" ]
+
+{rank=same; Event;EventStore}
+{rank=same; Projection;Aggregate;}
+}
+@enddot

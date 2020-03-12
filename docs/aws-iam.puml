@@ -1,0 +1,40 @@
+@startdot
+digraph G {
+
+    node [style=filled]
+
+    user1;
+    user2;
+    user3;
+    user4;
+    user5;
+    user6;
+
+    group1;
+    group2;
+
+    role1;
+    role2;
+    role3;
+
+    policy1;
+    policy2;
+    policy3;
+
+    group1->{user1;user2;user3}
+    group2->{user4;user5;user6}
+
+    policy1->role1
+    policy2->{role1;role2}
+    policy3->{role1;role2;role3}
+
+    role1->group1;
+    role2->group2;
+
+app1;
+app2;
+app3;
+service1;
+}
+
+@enddot
