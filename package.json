@@ -13,6 +13,7 @@
   "license": "ISC",
   "dependencies": {
     "esm": "^3.2.25",
+    "eventstore-ts-client": "0.6.2",
     "luxon": "^1.22.0",
     "koa": "^2.11.0",
     "koa-router": "^7.4.0",
