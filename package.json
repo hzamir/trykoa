@@ -1,4 +1,5 @@
 {
+  "node": ">=12.13.0",
   "type": "commonjs",
   "name": "koatry",
   "version": "1.0.0",
